@@ -164,7 +164,7 @@ describe('SignUp Controller', () => {
       expect(httpResponse.body).toEqual(new ServerError())
     })
   })
-  describe('when i have invalid parameters', () => {
+  describe('when i have valid parameters', () => {
     it('should call AddAccount', () => {
       const { sut, addAccountStub } = makeSut()
       const addSpy = jest.spyOn(addAccountStub, 'add')
@@ -182,6 +182,24 @@ describe('SignUp Controller', () => {
         email: 'gaara@areia.com',
         password: 'gaara123'
       })
+    })
+
+    it('should return 500 if AddAccount throws', () => {
+      const { sut, addAccountStub } = makeSut()
+      jest.spyOn(addAccountStub, 'add').mockImplementationOnce(() => {
+        throw new Error()
+      })
+      const httpRequest = {
+        body: {
+          name: 'Gaara',
+          email: 'gaara@areia.com',
+          password: 'gaara123',
+          passwordConfirmation: 'gaara123'
+        }
+      }
+      const httpResponse = sut.handle(httpRequest)
+      expect(httpResponse.statusCode).toBe(500)
+      expect(httpResponse.body).toEqual(new ServerError())
     })
   })
 })
