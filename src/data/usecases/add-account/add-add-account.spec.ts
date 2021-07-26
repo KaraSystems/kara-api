@@ -1,4 +1,4 @@
-import { Encrypter } from '../../protocols/encrypter'
+import { Encrypter } from './bd-add-account-protocols'
 import { DbAddAccount } from './add-add-account'
 
 interface SubType {
