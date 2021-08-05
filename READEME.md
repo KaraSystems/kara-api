@@ -7,3 +7,11 @@ Executar os testes enquanto desenvolve
 
 Executar os testes uma vez
 `npm test`
+
+# MongoDb
+
+Intalação MongoDb
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
+executar serviço `sudo systemctl start mongod`
+acessar bases `mongo`
