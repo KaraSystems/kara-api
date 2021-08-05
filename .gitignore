@@ -6,7 +6,7 @@
 # Node artifact files
 node_modules/
 dist/
-coverage/lcov-report/
+coverage/
 /__tests__/coverage
 /__tests__/database.sqlite
 .vscode
