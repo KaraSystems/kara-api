@@ -1,0 +1,44 @@
+<testExecutions version="1">
+<file path="src/main/routes/signup-routes.test.ts">
+<testCase name="SignUp Routes should return an account on success " duration="267" />
+</file>
+<file path="src/main/middlewares/content-type.test.ts">
+<testCase name="Content Type Middleware should return default content type as json" duration="9" />
+<testCase name="Content Type Middleware should return xml content type when forced" duration="4" />
+</file>
+<file path="src/main/middlewares/cors.test.ts">
+<testCase name="CORS Middleware should enable CORS" duration="8" />
+</file>
+<file path="src/main/middlewares/body-parser.test.ts">
+<testCase name="Body Parser Middleware should parse body as json" duration="15" />
+</file>
+<file path="src/data/usecases/add-account/add-add-account.spec.ts">
+<testCase name="DbAddAccount Usecase should call Encrypter with correct password" duration="4" />
+<testCase name="DbAddAccount Usecase should throw if Encrypter throw" duration="6" />
+<testCase name="DbAddAccount Usecase should call AddAccountRepository with correct values" duration="1" />
+<testCase name="DbAddAccount Usecase should throw if Encrypter throw" duration="1" />
+<testCase name="DbAddAccount Usecase should return an account on success" duration="1" />
+</file>
+<file path="src/presentation/controllers/signup/signup.spec.ts">
+<testCase name="SignUp Controller when I have invalid parameters should return 400 if no name is provided" duration="1" />
+<testCase name="SignUp Controller when I have invalid parameters should return 400 if no email is provided" duration="1" />
+<testCase name="SignUp Controller when I have invalid parameters should return 400 if no password is provided" duration="0" />
+<testCase name="SignUp Controller when I have invalid parameters should return 400 if password confirmation fails" duration="1" />
+<testCase name="SignUp Controller when I have invalid parameters should return 400 if no password confirmation is provided" duration="1" />
+<testCase name="SignUp Controller when I have invalid parameters should return 400 if an invalid email is provided" duration="0" />
+<testCase name="SignUp Controller when I have invalid parameters should call EmailValidator with correct email" duration="0" />
+<testCase name="SignUp Controller when I have invalid parameters should return 500 if EmailValidator throws" duration="1" />
+<testCase name="SignUp Controller when i have valid parameters should call AddAccount" duration="1" />
+<testCase name="SignUp Controller when i have valid parameters should return 500 if AddAccount throws" duration="4" />
+<testCase name="SignUp Controller when i have valid parameters should return 200 and create a new Account" duration="1" />
+</file>
+<file path="src/infra/criptography/bcrypt-adapter.spec.ts">
+<testCase name="Bcrypt Adapter Should call bcrypt with correct values" duration="1" />
+<testCase name="Bcrypt Adapter Should return a hash on success" duration="1" />
+</file>
+<file path="src/utils/email-validator-adapter.spec.ts">
+<testCase name="EmailValidator Adapter should return false if validator returns false" duration="1" />
+<testCase name="EmailValidator Adapter should return true if validator returns true" duration="1" />
+<testCase name="EmailValidator Adapter should call validator with correct email" duration="1" />
+</file>
+</testExecutions>
