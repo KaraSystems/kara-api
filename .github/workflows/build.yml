@@ -9,20 +9,20 @@ jobs:
   tests:
     name: "Unit tests"
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v1
+      - uses: c-hive/gha-npm-cache@v1
       - run: npm install
       - run: npm run test:ci
-        with:
-          bundler-cache: true
 
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: c-hive/gha-npm-cache@v1
         with:
-          bundler-cache: true
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
