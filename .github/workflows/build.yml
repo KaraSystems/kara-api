@@ -6,6 +6,13 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run Jest
+        uses: stefanoeb/jest-action@1.0.3
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
@@ -18,5 +25,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: Run Jest
-        uses: stefanoeb/jest-action@1.0.3
