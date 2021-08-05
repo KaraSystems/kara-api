@@ -20,6 +20,9 @@
       "git add"
     ]
   },
+  "jest": {
+    "testResultsProcessor": "jest-sonar-reporter"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -42,6 +45,7 @@
     "eslint-plugin-promise": "^4.3.1",
     "husky": "^7.0.0",
     "jest": "^27.0.6",
+    "jest-sonar-reporter": "^2.0.0",
     "lint-staged": "^11.0.1",
     "sucrase": "^3.20.0",
     "supertest": "^6.1.4",
