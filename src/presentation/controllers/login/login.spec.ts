@@ -60,13 +60,7 @@ describe('Login Controller', () => {
   it('shoud call EmailValidator with correct email', async () => {
     const { sut, emailValidatorStub } = makeSut()
     const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
-    const httpRequest = {
-      body: {
-        email: 'gaara@areia.com',
-        password: 'gaara@123'
-      }
-    }
-    await sut.handle(httpRequest)
+    await sut.handle(makeFakeRequest())
     expect(isValidSpy).toHaveBeenCalledWith('gaara@areia.com')
   })
 
