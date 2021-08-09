@@ -68,18 +68,11 @@ const makeSut = (): SutTypes => {
 
 describe('SignUp Controller', () => {
   describe('when have invalid parameters', () => {
-    it('should return 400 if password confirmation fails', async () => {
-      const { sut } = makeSut()
-      const httpRequest = {
-        body: {
-          name: 'Gaara',
-          email: 'gaara@areia.com',
-          password: 'gaara123',
-          passwordConfirmation: 'invalid_password'
-        }
-      }
-      const httpResponse = await sut.handle(httpRequest)
-      expect(httpResponse).toEqual(badRequest(new InvalidParamError('passwordConfirmation')))
+    it('should return 400 if Validation returns an error', async () => {
+      const { sut, validationStub } = makeSut()
+      jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+      const httpResponse = await sut.handle(makeFakeRequest())
+      expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
     })
 
     it('should return 400 if an invalid email is provided', async () => {
@@ -141,13 +134,6 @@ describe('SignUp Controller', () => {
       const httpRequest = makeFakeRequest()
       await sut.handle(makeFakeRequest())
       expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
-    })
-
-    it('should return 400 if Validation returns an error', async () => {
-      const { sut, validationStub } = makeSut()
-      jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
-      const httpResponse = await sut.handle(makeFakeRequest())
-      expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
     })
   })
 })
