@@ -19,8 +19,7 @@
   "lint-staged": {
     "*.ts": [
       "eslint 'src/**' --fix",
-      "npm rum test:staged",
-      "git add"
+      "npm rum test:staged"
     ]
   },
   "keywords": [],
