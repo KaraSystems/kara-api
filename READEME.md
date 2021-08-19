@@ -21,6 +21,27 @@ acessar bases `mongo`
 Build API
 `sudo docker build -t kara-api .`
 `sudo docker-compose build`
+`npm run up`
 
 Execute API
 `sudo docker run -p 5000:5000 kara-api`
+
+# Debug
+
+Criar o arquivo `launch.json`
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Docker: Attach to Node",
+      "remoteRoot": "/usr/application/kara-api",
+      "port": 9222,
+      "restart": true
+    }
+  ]
+}
+```

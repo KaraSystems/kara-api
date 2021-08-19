@@ -13,10 +13,12 @@ services:
     build: .
     restart: always
     image: kara-api
-    command: npm start
+    command: npm run debug
     volumes:
       - ./dist:/usr/application/kara-api/dist
+      - ./package.json:/usr/application/kara-api/package.json
     ports:
       - "5050:5050"
+      - "9222:9222"
     links:
       - mongo
