@@ -1,5 +1,13 @@
 ## Documentação da aplicação
 
+# New Tag version
+
+Generate new tag version
+`git tag -m "0.0.0" -a "0.0.0"`
+
+Send tags to git
+`git push --follow-tags`
+
 # Testes
 
 Executar os testes enquanto desenvolve
