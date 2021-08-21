@@ -43,7 +43,11 @@ Build API
 `npm run up`
 
 Execute API
-`sudo docker run -p 5000:5000 kara-api`
+`docker-compose up`
+`docker-compose down`
+
+Atualizar os arquivos em tempo real no docker
+`tsc -w`
 
 # Debug
 
