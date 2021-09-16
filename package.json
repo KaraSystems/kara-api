@@ -8,6 +8,7 @@
     "build": "rimraf dist && tsc",
     "dev": "sucrase-node src/main/server.ts",
     "prepare": "husky install",
+    "workflow:test": "jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
     "test": "jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
