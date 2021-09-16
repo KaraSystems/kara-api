@@ -10,6 +10,7 @@
     "up": "npm run build && docker-compose up -d",
     "down": "docker-compose down",
     "prepare": "husky install",
+    "workflow:test": "jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
     "test": "jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
