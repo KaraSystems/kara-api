@@ -4,5 +4,6 @@ export interface HttpRespose {
 }
 
 export interface HttpRequest {
+  headers?: any
   body?: any
 }
