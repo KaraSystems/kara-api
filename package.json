@@ -1,6 +1,6 @@
 {
   "name": "kara",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,9 +10,10 @@
     "up": "npm run build && docker-compose up -d",
     "down": "docker-compose down",
     "prepare": "husky install",
-    "test": "jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
+    "workflow:test": "jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
+    "test": "npm run clear_jest && jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
     "test:verbose": "jest --passWithNoTests --runInBand",
-    "test:unit": "npm test -- --watch -c jest-unit-config.js",
+    "test:unit": "npm run clear_jest && npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",

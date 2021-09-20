@@ -1,0 +1,38 @@
+import { MongoHelper } from '../helpers/mongo-helper'
+import { Collection } from 'mongodb'
+import { SurveyMongoRepository } from './survey-mongo-repository'
+
+let surveyCollection: Collection
+describe('Survey Mongo Repository', () => {
+  beforeAll(async () => {
+    await MongoHelper.connect(process.env.MONGO_URL as string)
+  })
+
+  afterAll(async () => {
+    await MongoHelper.disconnect()
+  })
+
+  beforeEach(async () => {
+    surveyCollection = await MongoHelper.getCollection('surveys')
+    await surveyCollection.deleteMany({})
+  })
+
+  const makeSut = (): SurveyMongoRepository => {
+    return new SurveyMongoRepository()
+  }
+
+  it('Should add a survey on success', async () => {
+    const sut = makeSut()
+    await sut.add({
+      question: 'any_questions',
+      answers: [{
+        image: 'any_image',
+        answer: 'any_answer'
+      }, {
+        answer: 'other_answer'
+      }]
+    })
+    const survey = await surveyCollection.findOne({ question: 'any_questions' })
+    expect(survey).toBeTruthy()
+  })
+})
