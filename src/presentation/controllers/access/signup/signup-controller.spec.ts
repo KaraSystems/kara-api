@@ -53,7 +53,7 @@ const makeAddAccount = (): AddAccount => {
   }
   return new AddAccountStub()
 }
-interface SutTypes {
+type SutTypes = {
   sut: SignUpController
   addAccountStub: AddAccount
   validationStub: Validation
