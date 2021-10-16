@@ -57,7 +57,7 @@ const makeFakeAuthentication = (): AuthenticationModel => ({
   password: 'gara@123'
 })
 
-interface SutTypes {
+type SutTypes = {
   sut: DbAuthentication
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
   hashComparerStub: HashComparer
