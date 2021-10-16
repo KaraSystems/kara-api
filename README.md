@@ -38,6 +38,7 @@ executar serviço `sudo systemctl start mongod`
 acessar bases `mongo`
 
 # Docker
+Mongo do docker roda na porta 27018 para não conflitar com o local
 
 Build API
 `sudo docker build -t kara-api .`
