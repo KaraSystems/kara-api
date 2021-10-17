@@ -67,6 +67,7 @@ describe('Survey Mongo Repository', () => {
       const surveys = await sut.loadAll()
 
       expect(surveys.length).toBe(2)
+      expect(surveys[0].id).toBeTruthy()
       expect(surveys[0].question).toBe('any_questions')
       expect(surveys[1].question).toBe('other_questions')
     })
@@ -97,6 +98,7 @@ describe('Survey Mongo Repository', () => {
       const surveys = await sut.loadById(res.ops[0]._id)
 
       expect(surveys.question).toBe('any_questions')
+      expect(surveys.id).toBeTruthy()
     })
 
     it('Should return empty if load survey by id unknown', async () => {
