@@ -98,5 +98,23 @@ describe('Survey Mongo Repository', () => {
 
       expect(surveys.question).toBe('any_questions')
     })
+
+    it('Should return empty if load survey by id unknown', async () => {
+      await surveyCollection.insertOne({
+        question: 'any_questions',
+        answers: [{
+          image: 'any_image',
+          answer: 'any_answer'
+        }, {
+          answer: 'other_answer'
+        }],
+        date: new Date()
+      })
+      const sut = makeSut()
+
+      const survey = await sut.loadById('invalid_id')
+
+      expect(survey).toBeNull()
+    })
   })
 })
