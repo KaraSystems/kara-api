@@ -1,7 +1,7 @@
+import { SaveSurveyResultRepository } from '@/data/protocols/db/survey-result/save-survey-result-repository'
 import {
   SaveSurveyResult,
   SaveSurveyResultModel,
-  SaveSurveyResultRepository,
   SurveyResultModel
 } from './db-save-survey-result-protocols'
 
