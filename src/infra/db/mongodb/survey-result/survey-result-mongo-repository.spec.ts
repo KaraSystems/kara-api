@@ -4,6 +4,8 @@ import { SurveyModel } from '@/domain/models/survey'
 import { AccountModel } from '@/domain/models/account'
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository'
 
+const password = Date.now().toString()
+
 let surveyCollection: Collection
 let surveyResultCollection: Collection
 let accountCollection: Collection
@@ -30,7 +32,7 @@ const makeAccount = async (): Promise<AccountModel> => {
   const res = await accountCollection.insertOne({
     name: 'any_name',
     email: 'any_email@mail.com',
-    password: 'any_password',
+    password: password,
     date: new Date()
   })
   return res.ops[0]

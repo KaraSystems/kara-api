@@ -8,11 +8,13 @@ import {
   AuthenticationModel
 } from './db-authentication-protocols'
 
+const password = Date.now().toString()
+
 const makeFakeAccount = (): AccountModel => ({
   id: 'any_id',
   name: 'Gaara',
   email: 'gaara@areia.com',
-  password: 'hash_password'
+  password: password
 })
 
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
@@ -88,7 +90,9 @@ describe('DbAuthentication UseCase', () => {
   it('should call LoadAccountByEmailRepository with correct email', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
     const loadSpy = jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail')
+
     await sut.auth(makeFakeAuthentication())
+
     expect(loadSpy).toHaveBeenCalledWith('gaara@areia.com')
   })
 
@@ -96,69 +100,89 @@ describe('DbAuthentication UseCase', () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
     jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail')
       .mockReturnValueOnce(Promise.reject(new Error()))
+
     const promise = sut.auth(makeFakeAuthentication())
+
     await expect(promise).rejects.toThrow()
   })
 
   it('should return null if LoadAccountByEmailRepository returns null', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
     jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(Promise.resolve(null))
+
     const accessToken = await sut.auth(makeFakeAuthentication())
+
     expect(accessToken).toBeNull()
   })
 
   it('should call HashComparer with correct values', async () => {
     const { sut, hashComparerStub } = makeSut()
     const comparerSpy = jest.spyOn(hashComparerStub, 'compare')
+
     await sut.auth(makeFakeAuthentication())
-    expect(comparerSpy).toHaveBeenCalledWith('gara@123', 'hash_password')
+
+    expect(comparerSpy).toHaveBeenCalledWith('gara@123', password)
   })
 
   it('should throw if HashComparer throws', async () => {
     const { sut, hashComparerStub } = makeSut()
     jest.spyOn(hashComparerStub, 'compare').mockReturnValueOnce(Promise.reject(new Error()))
+
     const promise = sut.auth(makeFakeAuthentication())
+
     await expect(promise).rejects.toThrow()
   })
 
   it('should return null if HashComparer returns false', async () => {
     const { sut, hashComparerStub } = makeSut()
     jest.spyOn(hashComparerStub, 'compare').mockReturnValueOnce(Promise.resolve(false))
+
     const accessToken = await sut.auth(makeFakeAuthentication())
+
     expect(accessToken).toBeNull()
   })
 
   it('should call Encrypter with correct id', async () => {
     const { sut, encrypterStub } = makeSut()
     const encryptSpy = jest.spyOn(encrypterStub, 'encrypt')
+
     await sut.auth(makeFakeAuthentication())
+
     expect(encryptSpy).toHaveBeenCalledWith('any_id')
   })
 
   it('should throw if Encrypter throws', async () => {
     const { sut, encrypterStub } = makeSut()
     jest.spyOn(encrypterStub, 'encrypt').mockReturnValueOnce(Promise.reject(new Error()))
+
     const promise = sut.auth(makeFakeAuthentication())
+
     await expect(promise).rejects.toThrow()
   })
 
   it('should return a token on success', async () => {
     const { sut } = makeSut()
+
     const accessToken = await sut.auth(makeFakeAuthentication())
+
     expect(accessToken).toEqual('any_token')
   })
 
   it('should call UpdateAccessTokenRepository with correct values', async () => {
     const { sut, updateAccessTokenRepositoryStub } = makeSut()
     const updateAccessTokenSpy = jest.spyOn(updateAccessTokenRepositoryStub, 'updateAccessToken')
+
     await sut.auth(makeFakeAuthentication())
+
     expect(updateAccessTokenSpy).toHaveBeenCalledWith('any_id', 'any_token')
   })
 
   it('should throw if UpdateAccessTokenRepository throws', async () => {
     const { sut, updateAccessTokenRepositoryStub } = makeSut()
     jest.spyOn(updateAccessTokenRepositoryStub, 'updateAccessToken').mockReturnValueOnce(Promise.reject(new Error()))
+
     const promise = sut.auth(makeFakeAuthentication())
+
     await expect(promise).rejects.toThrow()
   })
 })

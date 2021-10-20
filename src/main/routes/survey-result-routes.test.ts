@@ -5,6 +5,8 @@ import { Collection } from 'mongodb'
 import { sign } from 'jsonwebtoken'
 import env from '../config/env'
 
+const password = Date.now().toString()
+
 let surveyCollection: Collection
 let accountCollection: Collection
 
@@ -12,7 +14,7 @@ const makeAccessToken = async (): Promise<string> => {
   const res = await accountCollection.insertOne({
     name: 'Gaara',
     email: 'gaara@areia.com',
-    password: 'gaara@123',
+    password: password,
     role: 'admin'
   })
   const id = res.ops[0]._id
