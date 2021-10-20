@@ -114,7 +114,7 @@ describe('Survey Mongo Repository', () => {
       })
       const sut = makeSut()
 
-      const survey = await sut.loadById('invalid_id')
+      const survey = await sut.loadById('616b3888ad4c847d20780dfa')
 
       expect(survey).toBeNull()
     })
