@@ -1,7 +1,7 @@
-import { AccessDeniedError } from '../errors'
+import { AccountModel, HttpRequest, LoadAccountByToken } from './auth-middleware-protocols'
 import { forbidden, ok, serverError } from '../helpers/http/http-helper'
 import { AuthMiddleware } from './auth-middleware'
-import { AccountModel, HttpRequest, LoadAccountByToken } from './auth-middleware-protocols'
+import { AccessDeniedError } from '../errors'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
@@ -16,7 +16,7 @@ const makeFakeRequest = (): HttpRequest => ({
   }
 })
 
-interface SutTypes {
+type SutTypes = {
   sut: AuthMiddleware
   loadAccountByTokenStub: LoadAccountByToken
 }

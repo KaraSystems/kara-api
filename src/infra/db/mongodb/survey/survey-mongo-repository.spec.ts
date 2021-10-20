@@ -67,6 +67,7 @@ describe('Survey Mongo Repository', () => {
       const surveys = await sut.loadAll()
 
       expect(surveys.length).toBe(2)
+      expect(surveys[0].id).toBeTruthy()
       expect(surveys[0].question).toBe('any_questions')
       expect(surveys[1].question).toBe('other_questions')
     })
@@ -77,6 +78,45 @@ describe('Survey Mongo Repository', () => {
       const surveys = await sut.loadAll()
 
       expect(surveys.length).toBe(0)
+    })
+  })
+
+  describe('loadById()', () => {
+    it('Should load survey by id on success', async () => {
+      const res = await surveyCollection.insertOne({
+        question: 'any_questions',
+        answers: [{
+          image: 'any_image',
+          answer: 'any_answer'
+        }, {
+          answer: 'other_answer'
+        }],
+        date: new Date()
+      })
+      const sut = makeSut()
+
+      const surveys = await sut.loadById(res.ops[0]._id)
+
+      expect(surveys.question).toBe('any_questions')
+      expect(surveys.id).toBeTruthy()
+    })
+
+    it('Should return empty if load survey by id unknown', async () => {
+      await surveyCollection.insertOne({
+        question: 'any_questions',
+        answers: [{
+          image: 'any_image',
+          answer: 'any_answer'
+        }, {
+          answer: 'other_answer'
+        }],
+        date: new Date()
+      })
+      const sut = makeSut()
+
+      const survey = await sut.loadById('616b3888ad4c847d20780dfa')
+
+      expect(survey).toBeNull()
     })
   })
 })

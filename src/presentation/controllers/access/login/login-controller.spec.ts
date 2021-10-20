@@ -1,6 +1,6 @@
-import { MissingParamError, ServerError } from '../../../errors'
-import { badRequest, ok, serverError, unauthorized } from '../../../helpers/http/http-helper'
 import { HttpRequest, Authentication, Validation, AuthenticationModel } from './login-controller-protocols'
+import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http/http-helper'
+import { MissingParamError, ServerError } from '@/presentation/errors'
 import { LoginController } from './login-controller'
 
 const makeValidation = (): Validation => {
@@ -28,7 +28,7 @@ const makeFakeRequest = (): HttpRequest => ({
   }
 })
 
-interface SutTypes {
+type SutTypes = {
   sut: LoginController
   authenticationStub: Authentication
   validationStub: Validation

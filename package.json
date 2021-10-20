@@ -1,19 +1,19 @@
 {
   "name": "kara",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node ./dist/main/server.js",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
     "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/main/server.js",
     "up": "npm run build && docker-compose up -d",
     "down": "docker-compose down",
     "prepare": "husky install",
-    "workflow:test": "jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
+    "workflow:test": "npm run clear_jest && jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
     "test": "npm run clear_jest && jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
-    "test:verbose": "jest --passWithNoTests --runInBand",
-    "test:unit": "npm run clear_jest && npm test -- --watch -c jest-unit-config.js",
+    "test:verbose": "npm run clear_jest && jest --passWithNoTests --runInBand",
+    "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
@@ -59,6 +59,7 @@
     "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2",
     "mongodb": "^3.6.10",
     "nodemon": "^2.0.12",
     "validator": "^13.6.0"
@@ -69,5 +70,8 @@
   },
   "optionalDependencies": {
     "fsevents": "^2.3.2"
+  },
+  "_moduleAliases": {
+    "@": "dist"
   }
 }
