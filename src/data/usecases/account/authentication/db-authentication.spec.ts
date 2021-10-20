@@ -56,7 +56,7 @@ const makeUpdateAccessTokenRepository = (): UpdateAccessTokenRepository => {
 
 const makeFakeAuthentication = (): AuthenticationModel => ({
   email: 'gaara@areia.com',
-  password: 'gara@123'
+  password: password
 })
 
 type SutTypes = {
@@ -121,7 +121,7 @@ describe('DbAuthentication UseCase', () => {
 
     await sut.auth(makeFakeAuthentication())
 
-    expect(comparerSpy).toHaveBeenCalledWith('gara@123', password)
+    expect(comparerSpy).toHaveBeenCalledWith(password, password)
   })
 
   it('should throw if HashComparer throws', async () => {
