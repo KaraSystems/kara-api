@@ -16,7 +16,7 @@
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
-    "test:ci": "npm test -- --coverage --testResultsProcessor=jest-sonar-reporter",
+    "test:ci": "npm test -- --coverage",
     "clear_jest": "jest --clearCache"
   },
   "lint-staged": {
@@ -48,7 +48,6 @@
     "eslint-plugin-promise": "^4.3.1",
     "husky": "^7.0.0",
     "jest": "^27.0.6",
-    "jest-sonar-reporter": "^2.0.0",
     "lint-staged": "^11.0.1",
     "mockdate": "^3.0.5",
     "rimraf": "^3.0.2",
