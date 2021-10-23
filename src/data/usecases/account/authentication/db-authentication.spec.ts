@@ -5,7 +5,7 @@ import {
   HashComparer,
   Encrypter,
   UpdateAccessTokenRepository,
-  AuthenticationModel
+  AuthenticationParams
 } from './db-authentication-protocols'
 
 const password = Date.now().toString()
@@ -54,7 +54,7 @@ const makeUpdateAccessTokenRepository = (): UpdateAccessTokenRepository => {
   return new UpdateAccessTokenRepositoryStub()
 }
 
-const makeFakeAuthentication = (): AuthenticationModel => ({
+const makeFakeAuthentication = (): AuthenticationParams => ({
   email: 'gaara@areia.com',
   password: password
 })
