@@ -1,60 +1,19 @@
 import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers/http/http-helper'
+import { mockAddAccount, mockAuthentication, mockValidation } from '@/presentation/test'
 import { EmailInUseError, MissingParamError, ServerError } from '@/presentation/errors'
-import {
-  AddAccount,
-  AddAccountModel,
-  AccountModel,
-  Validation,
-  AuthenticationModel,
-  Authentication
-} from './signup-controller-protocols'
+import { AddAccount, Validation, Authentication } from './signup-controller-protocols'
 import { SignUpController } from './signup-controller'
 import { HttpRequest } from '@/presentation/protocols'
-
-const password = Date.now().toString()
-
-const makeAuthenticationStub = (): Authentication => {
-  class AuthenticationStub implements Authentication {
-    async auth (authentication: AuthenticationModel): Promise<string> {
-      return await Promise.resolve('any_token')
-    }
-  }
-  return new AuthenticationStub()
-}
-
-const makeValidation = (): Validation => {
-  class ValidationStub implements Validation {
-    validate (input: any): Error | null {
-      return null
-    }
-  }
-  return new ValidationStub()
-}
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {
     name: 'Gaara',
     email: 'gaara@areia.com',
-    password: password,
-    passwordConfirmation: password
+    password: 'any_password',
+    passwordConfirmation: 'any_password'
   }
 })
 
-const makeFakeAccount = (): AccountModel => ({
-  id: 'valid_id',
-  name: 'Kabuto',
-  email: 'kabuto@son.com',
-  password: password
-})
-
-const makeAddAccount = (): AddAccount => {
-  class AddAccountStub implements AddAccount {
-    async add (account: AddAccountModel): Promise<AccountModel | null> {
-      return await Promise.resolve(makeFakeAccount())
-    }
-  }
-  return new AddAccountStub()
-}
 type SutTypes = {
   sut: SignUpController
   addAccountStub: AddAccount
@@ -63,9 +22,9 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
-  const addAccountStub = makeAddAccount()
-  const validationStub = makeValidation()
-  const authenticationStub = makeAuthenticationStub()
+  const addAccountStub = mockAddAccount()
+  const validationStub = mockValidation()
+  const authenticationStub = mockAuthentication()
   const sut = new SignUpController(addAccountStub, validationStub, authenticationStub)
   return {
     sut,
@@ -94,7 +53,7 @@ describe('SignUp Controller', () => {
     expect(addSpy).toHaveBeenCalledWith({
       name: 'Gaara',
       email: 'gaara@areia.com',
-      password: password
+      password: 'any_password'
     })
   })
 
@@ -142,7 +101,7 @@ describe('SignUp Controller', () => {
 
     expect(authSpy).toHaveBeenCalledWith({
       email: 'gaara@areia.com',
-      password: password
+      password: 'any_password'
     })
   })
 
