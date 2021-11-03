@@ -1,5 +1,5 @@
 import { DbLoadSurveyById, LoadSurveyByIdRepository } from './db-load-survey-by-id-protocols'
-import { mockLoadSurveyByIdRepositoryStub } from '@/data/test'
+import { mockLoadSurveyByIdRepository } from '@/data/test'
 import { mockSurveyModel } from '@/domain/test'
 import MockDate from 'mockdate'
 
@@ -9,7 +9,7 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
-  const loadSurveyByIdRepositoryStub = mockLoadSurveyByIdRepositoryStub()
+  const loadSurveyByIdRepositoryStub = mockLoadSurveyByIdRepository()
   const sut = new DbLoadSurveyById(loadSurveyByIdRepositoryStub)
 
   return {
