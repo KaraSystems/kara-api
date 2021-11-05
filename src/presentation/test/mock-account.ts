@@ -12,7 +12,7 @@ export class AuthenticationSpy implements Authentication {
   async auth (authenticationParams: AuthenticationParams): Promise<string> {
     this.authenticationParams = authenticationParams
 
-    return await Promise.resolve(this.token)
+    return Promise.resolve(this.token)
   }
 }
 
@@ -23,7 +23,7 @@ export class AddAccountSpy implements AddAccount {
   async add (data: AddAccountParams): Promise<AccountModel | null> {
     this.addAccountParams = data
 
-    return await Promise.resolve(this.accountModule)
+    return Promise.resolve(this.accountModule)
   }
 }
 
@@ -36,6 +36,6 @@ export class LoadAccountByTokenSpy implements LoadAccountByToken {
     this.accessToken = accessToken
     this.role = role as any
 
-    return await Promise.resolve(this.accountModel)
+    return Promise.resolve(this.accountModel)
   }
 }

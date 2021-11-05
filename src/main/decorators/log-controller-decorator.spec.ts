@@ -71,11 +71,11 @@ describe('LogController Decorator', () => {
 
   it('should call LogErrorRepository with correct error if controller returns a server error', async () => {
     const { sut, controllerSpy, logErrorRepositorySpy } = makeSut()
-    const serverError = mockServerError()
-    controllerSpy.httpResponse = serverError
+    const serverErrorTmp = mockServerError()
+    controllerSpy.httpResponse = serverErrorTmp
 
     await sut.handle(mockRequest())
 
-    expect(logErrorRepositorySpy.stack).toBe(serverError.body.stack)
+    expect(logErrorRepositorySpy.stack).toBe(serverErrorTmp.body.stack)
   })
 })
