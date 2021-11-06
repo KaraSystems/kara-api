@@ -30,7 +30,7 @@ export class ControllerSpy implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpRespose> {
     this.httpRequest = httpRequest
 
-    return Promise.resolve(this.httpResponse)
+    return this.httpResponse
   }
 }
 

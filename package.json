@@ -10,8 +10,8 @@
     "up": "npm run build && docker-compose up -d",
     "down": "docker-compose down",
     "prepare": "husky install",
-    "workflow:test": "npm run clear_jest && jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
-    "test": "npm run clear_jest && jest --passWithNoTests --silent --runInBand --collectCoverageFrom",
+    "workflow:test": "npm run clear_jest && jest --passWithNoTests --silent --runInBand --no-cache",
+    "test": "npm run clear_jest && jest --passWithNoTests --runInBand --silent --no-cache",
     "test:verbose": "npm run clear_jest && jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
@@ -64,7 +64,7 @@
     "module-alias": "^2.2.2",
     "mongodb": "^3.6.10",
     "nodemon": "^2.0.12",
-    "validator": "^13.6.0"
+    "validator": "^13.7.0"
   },
   "engines": {
     "node": "14.x",

@@ -9,7 +9,6 @@ export class AddSurveySpy implements AddSurvey {
 
   async add (data: AddSurveyParams): Promise<void> {
     this.addSurveyParams = data
-    return Promise.resolve()
   }
 }
 
@@ -17,7 +16,7 @@ export class LoadSurveysSpy implements LoadSurveys {
   surveyModel: SurveyModel[] = mockSurveyModels()
 
   async load (): Promise<SurveyModel[]> {
-    return Promise.resolve(this.surveyModel)
+    return this.surveyModel
   }
 }
 
@@ -27,6 +26,6 @@ export class LoadSurveyByIdSpy implements LoadSurveyById {
 
   async loadById (id: string): Promise<SurveyModel> {
     this.id = id
-    return Promise.resolve(this.surveyModel)
+    return this.surveyModel
   }
 }
