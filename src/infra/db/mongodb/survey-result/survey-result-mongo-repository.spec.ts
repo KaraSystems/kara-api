@@ -19,7 +19,7 @@ const makeSurvey = async (): Promise<SurveyModel> => {
   return MongoHelper.map(res.ops[0])
 }
 
-const makeAccount = async (): Promise<AccountModel> => {
+const mmockAccount = async (): Promise<AccountModel> => {
   const res = await accountCollection.insertOne(mockAddAccountParams())
   return MongoHelper.map(res.ops[0])
 }
@@ -47,7 +47,7 @@ describe('SurveyMongoRepository', () => {
   describe('save()', () => {
     it('Should add a survey result if its new', async () => {
       const survey = await makeSurvey()
-      const account = await makeAccount()
+      const account = await mmockAccount()
       const sut = makeSut()
 
       await sut.save({
@@ -67,7 +67,7 @@ describe('SurveyMongoRepository', () => {
 
     it('Should update survey result if its not new', async () => {
       const survey = await makeSurvey()
-      const account = await makeAccount()
+      const account = await mmockAccount()
       await surveyResultCollection.insertOne({
         surveyId: new ObjectId(survey.id),
         accountId: new ObjectId(account.id),
@@ -95,7 +95,7 @@ describe('SurveyMongoRepository', () => {
   describe('loadBySurveyId()', () => {
     it('Should load survey result', async () => {
       const survey = await makeSurvey()
-      const account = await makeAccount()
+      const account = await mmockAccount()
 
       await surveyResultCollection.insertMany([
         {
