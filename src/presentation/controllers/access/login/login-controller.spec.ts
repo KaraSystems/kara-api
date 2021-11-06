@@ -1,5 +1,5 @@
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http/http-helper'
-import { HttpRequest } from './login-controller-protocols'
+import { HttpRequest } from '@/presentation/protocols'
 import { AuthenticationSpy, ValidationSpy } from '@/presentation/test'
 import { MissingParamError, ServerError } from '@/presentation/errors'
 import { LoginController } from './login-controller'

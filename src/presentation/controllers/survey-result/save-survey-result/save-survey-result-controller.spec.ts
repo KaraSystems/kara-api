@@ -1,4 +1,4 @@
-import { HttpRequest } from './save-survey-result-controller.protocols'
+import { HttpRequest } from '@/presentation/protocols'
 import { forbidden, ok, serverError } from '@/presentation/helpers/http/http-helper'
 import { LoadSurveyByIdSpy, SaveSurveyResultSpy } from '@/presentation/test'
 import { SaveSurveyResultController } from './save-survey-result-controller'
