@@ -8,7 +8,7 @@ import env from '../config/env'
 let surveyCollection: Collection
 let accountCollection: Collection
 
-const makeAccessToken = async (): Promise<string> => {
+const mockAccessToken = async (): Promise<string> => {
   const res = await accountCollection.insertOne({
     name: 'Gaara',
     email: 'gaara@areia.com',
@@ -59,7 +59,7 @@ describe('Survey Routes', () => {
     })
 
     it('should return 204 on add survey with valid accessToken ', async () => {
-      const accessToken = await makeAccessToken()
+      const accessToken = await mockAccessToken()
 
       await request(app)
         .post('/api/surveys')
@@ -85,7 +85,7 @@ describe('Survey Routes', () => {
     })
 
     it('should return 200 on load survey with valid accessToken ', async () => {
-      const accessToken = await makeAccessToken()
+      const accessToken = await mockAccessToken()
 
       await surveyCollection.insertOne({
         question: 'any_questions',
