@@ -14,7 +14,7 @@ const makeSut = (): SurveyResultMongoRepository => {
   return new SurveyResultMongoRepository()
 }
 
-const makeSurvey = async (): Promise<SurveyModel> => {
+const mockSurvey = async (): Promise<SurveyModel> => {
   const res = await surveyCollection.insertOne(mockAddSurveyParams())
   return MongoHelper.map(res.ops[0])
 }
@@ -46,7 +46,7 @@ describe('SurveyMongoRepository', () => {
 
   describe('save()', () => {
     it('Should add a survey result if its new', async () => {
-      const survey = await makeSurvey()
+      const survey = await mockSurvey()
       const account = await mmockAccount()
       const sut = makeSut()
 
@@ -66,7 +66,7 @@ describe('SurveyMongoRepository', () => {
     })
 
     it('Should update survey result if its not new', async () => {
-      const survey = await makeSurvey()
+      const survey = await mockSurvey()
       const account = await mmockAccount()
       await surveyResultCollection.insertOne({
         surveyId: new ObjectId(survey.id),
@@ -94,7 +94,7 @@ describe('SurveyMongoRepository', () => {
 
   describe('loadBySurveyId()', () => {
     it('Should load survey result', async () => {
-      const survey = await makeSurvey()
+      const survey = await mockSurvey()
       const account = await mmockAccount()
 
       await surveyResultCollection.insertMany([
@@ -123,7 +123,7 @@ describe('SurveyMongoRepository', () => {
     })
 
     it('Should return null if there is no survey result', async () => {
-      const survey = await makeSurvey()
+      const survey = await mockSurvey()
       const sut = makeSut()
 
       const surveyResult = await sut.loadBySurveyId(survey.id)
